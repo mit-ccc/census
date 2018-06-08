@@ -68,18 +68,18 @@ aws s3 cp --profile="$AWS_PROFILE" bg_data.csv.gz "$TARGET/data/level=bg/"
 rm bg_data.csv.gz
 
 # convert geographies to csv
-ogr2ogr -f csv -lco GEOMETRY=AS_WKT state.csv geo/state.json
-ogr2ogr -f csv -lco GEOMETRY=AS_WKT county.csv geo/county.json
-ogr2ogr -f csv -lco GEOMETRY=AS_WKT zcta.csv geo/zcta.json
-ogr2ogr -f csv -lco GEOMETRY=AS_WKT tract.csv geo/tract.json
-ogr2ogr -f csv -lco GEOMETRY=AS_WKT bg.csv geo/bg.json
+ogr2ogr -f csv -lco GEOMETRY=AS_WKT state_orig.csv geo/state.json
+ogr2ogr -f csv -lco GEOMETRY=AS_WKT county_orig.csv geo/county.json
+ogr2ogr -f csv -lco GEOMETRY=AS_WKT zcta_orig.csv geo/zcta.json
+ogr2ogr -f csv -lco GEOMETRY=AS_WKT tract_orig.csv geo/tract.json
+ogr2ogr -f csv -lco GEOMETRY=AS_WKT bg_orig.csv geo/bg.json
 
 # process geographies
-bin/process_state_geo.py state.csv
-bin/process_county_geo.py county.csv
-bin/process_zcta_geo.py zcta.csv
-bin/process_tract_geo.py tract.csv
-bin/process_bg_geo.py bg.csv
+bin/process_state_geo.py state_orig.csv state.csv
+bin/process_county_geo.py county_orig.csv county.csv
+bin/process_zcta_geo.py zcta_orig.csv zcta.csv
+bin/process_tract_geo.py tract_orig.csv tract.csv
+bin/process_bg_geo.py bg_orig.csv bg.csv
 
 # create athena tables
 aws athena start-query-execution --profile="$AWS_PROFILE" --query-string "$(cat ../sql/census_acs_data.sql)" && sleep 10
