@@ -75,4 +75,19 @@ ogr2ogr -f csv -lco GEOMETRY=AS_WKT tract.csv geo/tract.json
 ogr2ogr -f csv -lco GEOMETRY=AS_WKT bg.csv geo/bg.json
 
 # process geographies
+bin/process_state_geo.py state.csv
+bin/process_county_geo.py county.csv
+bin/process_zcta_geo.py zcta.csv
+bin/process_tract_geo.py tract.csv
+bin/process_bg_geo.py bg.csv
+
+# create athena tables
+aws athena start-query-execution --profile="$AWS_PROFILE" --query-string "$(cat ../sql/census_acs_data.sql)" && sleep 10
+aws athena start-query-execution --profile="$AWS_PROFILE" --query-string "msck repair table census_acs_data;"
+
+aws athena start-query-execution --profile="$AWS_PROFILE" --query-string "$(cat ../sql/census_acs_variable.sql)" && sleep 10
+aws athena start-query-execution --profile="$AWS_PROFILE" --query-string "msck repair table census_acs_variable;"
+
+aws athena start-query-execution --profile="$AWS_PROFILE" --query-string "$(cat ../sql/census_acs_geo.sql)" && sleep 10
+aws athena start-query-execution --profile="$AWS_PROFILE" --query-string "msck repair table census_acs_geo;"
 
