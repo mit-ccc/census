@@ -85,9 +85,8 @@ bin/process_bg_geo.py bg.csv
 aws athena start-query-execution --profile="$AWS_PROFILE" --query-string "$(cat ../sql/census_acs_data.sql)" && sleep 10
 aws athena start-query-execution --profile="$AWS_PROFILE" --query-string "msck repair table census_acs_data;"
 
-aws athena start-query-execution --profile="$AWS_PROFILE" --query-string "$(cat ../sql/census_acs_variable.sql)" && sleep 10
-aws athena start-query-execution --profile="$AWS_PROFILE" --query-string "msck repair table census_acs_variable;"
-
 aws athena start-query-execution --profile="$AWS_PROFILE" --query-string "$(cat ../sql/census_acs_geo.sql)" && sleep 10
 aws athena start-query-execution --profile="$AWS_PROFILE" --query-string "msck repair table census_acs_geo;"
+
+aws athena start-query-execution --profile="$AWS_PROFILE" --query-string "$(cat ../sql/census_acs_variable.sql)" && sleep 10
 
