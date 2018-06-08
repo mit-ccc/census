@@ -24,5 +24,5 @@ zcta['block_group_code'] = ''
 
 zcta = zcta[column_order]
 
-zcta.to_csv(sys.argv[1], index=False)
+zcta.to_csv(sys.argv[2], index=False)
 

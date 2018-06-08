@@ -25,5 +25,5 @@ state['state_fips'] = state['state_fips'].astype(str).replace(re.compile('\.0$')
 state['state_fips'] = state['state_fips'].replace('nan', '')
 state['state_fips'] = state['state_fips'].str.pad(2, 'left', '0')
 
-state.to_csv(sys.argv[1], index=False)
+state.to_csv(sys.argv[2], index=False)
 

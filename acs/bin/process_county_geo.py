@@ -28,5 +28,5 @@ county['county_fips'] = county['county_fips'].astype(str).replace(re.compile('\.
 county['county_fips'] = county['county_fips'].replace('nan', '')
 county['county_fips'] = county['county_fips'].str.pad(3, 'left', '0')
 
-county.to_csv(sys.argv[1], index=False)
+county.to_csv(sys.argv[2], index=False)
 

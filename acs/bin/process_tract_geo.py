@@ -32,5 +32,5 @@ tract['tract_code'] = tract['tract_code'] / 100.0
 tract['tract_code'] = tract['tract_code'].astype(str).replace(re.compile('\.0$'), '')
 tract['tract_code'] = tract['tract_code'].replace('nan', '')
 
-tract.to_csv(sys.argv[1], index=False)
+tract.to_csv(sys.argv[2], index=False)
 

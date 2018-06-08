@@ -34,5 +34,5 @@ bg['tract_code'] = bg['tract_code'].replace('nan', '')
 bg['block_group_code'] = bg['block_group_code'].astype(str).replace(re.compile('\.0$'), '')
 bg['block_group_code'] = bg['block_group_code'].replace('nan', '')
 
-bg.to_csv(sys.argv[1], index=False)
+bg.to_csv(sys.argv[2], index=False)
 
