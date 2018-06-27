@@ -47,25 +47,25 @@ rm {state,county,zcta,tract,bg}/*METADATA*
 rm variables.csv
 
 # process data
-bin/pivot.py state/* | gzip > state_data.csv.gz
-aws s3 cp --profile="$AWS_PROFILE" state_data.csv.gz "$TARGET/data/level=state/"
-rm state_data.csv.gz
+bin/pivot.py state/* > state_data.csv
+aws s3 cp --profile="$AWS_PROFILE" state_data.csv "$TARGET/data/level=state/"
+rm state_data.csv
 
-bin/pivot.py county/* | gzip > county_data.csv.gz
-aws s3 cp --profile="$AWS_PROFILE" county_data.csv.gz "$TARGET/data/level=county/"
-rm county_data.csv.gz
+bin/pivot.py county/* > county_data.csv
+aws s3 cp --profile="$AWS_PROFILE" county_data.csv "$TARGET/data/level=county/"
+rm county_data.csv
 
-bin/pivot.py zcta/* | gzip > zcta_data.csv.gz
-aws s3 cp --profile="$AWS_PROFILE" zcta_data.csv.gz "$TARGET/data/level=zcta/"
-rm zcta_data.csv.gz
+bin/pivot.py zcta/* > zcta_data.csv
+aws s3 cp --profile="$AWS_PROFILE" zcta_data.csv "$TARGET/data/level=zcta/"
+rm zcta_data.csv
 
-bin/pivot.py tract/* | gzip > tract_data.csv.gz
-aws s3 cp --profile="$AWS_PROFILE" tract_data.csv.gz "$TARGET/data/level=tract/"
-rm tract_data.csv.gz
+bin/pivot.py tract/* > tract_data.csv
+aws s3 cp --profile="$AWS_PROFILE" tract_data.csv "$TARGET/data/level=tract/"
+rm tract_data.csv
 
-bin/pivot.py bg/* | gzip > bg_data.csv.gz
-aws s3 cp --profile="$AWS_PROFILE" bg_data.csv.gz "$TARGET/data/level=bg/"
-rm bg_data.csv.gz
+bin/pivot.py bg/* > bg_data.csv
+aws s3 cp --profile="$AWS_PROFILE" bg_data.csv "$TARGET/data/level=bg/"
+rm bg_data.csv
 
 # convert geographies to csv
 ogr2ogr -f csv -lco GEOMETRY=AS_WKT state_orig.csv geo/state.json
