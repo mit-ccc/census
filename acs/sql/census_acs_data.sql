@@ -1,21 +1,22 @@
-CREATE EXTERNAL TABLE `cortico.census_acs_data`(
-  `geoid` string,
-  `variable` string,
-  `value` string)
-PARTITIONED BY ( 
-  `level` string)
-ROW FORMAT SERDE 
+drop table if exists cortico.census_acs_data;
+create external table cortico.census_acs_data (
+  geoid string,
+  variable string,
+  value string)
+partitioned by ( 
+  level string)
+row format serde 
   'org.apache.hadoop.hive.serde2.OpenCSVSerde' 
-WITH SERDEPROPERTIES ( 
+with serdeproperties ( 
   'quoteChar'='\"', 
   'separatorChar'=',') 
-STORED AS INPUTFORMAT 
+stored as inputformat 
   'org.apache.hadoop.mapred.TextInputFormat' 
-OUTPUTFORMAT 
+outputformat 
   'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat'
-LOCATION
+location
   's3://cortico-data/census/acs/data'
-TBLPROPERTIES (
+tblproperties (
   'compressionType'='none', 
   'skip.header.line.count'='1')
 

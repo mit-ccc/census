@@ -1,17 +1,18 @@
-CREATE EXTERNAL TABLE `cortico.census_acs_variable`(
-  `variable` string,
-  `description` string)
-ROW FORMAT SERDE 
+drop table if exists cortico.census_acs_variable;
+create external table cortico.census_acs_variable (
+  variable string,
+  description string)
+row format serde 
   'org.apache.hadoop.hive.serde2.OpenCSVSerde' 
-WITH SERDEPROPERTIES ( 
+with serdeproperties ( 
   'separatorChar'=',') 
-STORED AS INPUTFORMAT 
+stored as inputformat 
   'org.apache.hadoop.mapred.TextInputFormat' 
-OUTPUTFORMAT 
+outputformat 
   'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat'
-LOCATION
+location
   's3://cortico-data/census/acs/variables'
-TBLPROPERTIES (
+tblproperties (
   'compressionType'='none', 
   'skip.header.line.count'='1')
 
