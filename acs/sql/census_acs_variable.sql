@@ -1,4 +1,4 @@
-CREATE EXTERNAL TABLE `census_acs_variable`(
+CREATE EXTERNAL TABLE `cortico.census_acs_variable`(
   `variable` string,
   `description` string)
 ROW FORMAT SERDE 

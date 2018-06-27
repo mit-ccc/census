@@ -1,4 +1,4 @@
-CREATE EXTERNAL TABLE `census_acs_geo`(
+CREATE EXTERNAL TABLE `cortico.census_acs_geo`(
   `geoid` string,
   `name` string,
   `state_fips` string,
